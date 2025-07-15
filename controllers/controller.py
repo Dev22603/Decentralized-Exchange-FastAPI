@@ -4,3 +4,10 @@ def startup():
     
 def buy_asset():
     pass
+def sell_assset():
+    pass
+def quote():
+    pass
+def get_assets():
+    pass
+    

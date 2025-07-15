@@ -3,6 +3,6 @@ import os
 load_dotenv()
 
 class Config:
-    MONGO_URI = os.getenv('MONGO_URI')
-    MONGO_DB_NAME = os.getenv('MONGO_DB_NAME')
+    MONGODB_URI = os.getenv('MONGODB_URI')
+    DB_NAME = os.getenv('DB_NAME')
     COLLECTION_NAME = os.getenv('COLLECTION_NAME')
