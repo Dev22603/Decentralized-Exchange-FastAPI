@@ -5,21 +5,20 @@ def init_assets(eth_balance, usd_balance):
     collection = db[Config.COLLECTION_NAME]
 
     default_assets = {
-    
-            "ETH": {
-                "name": "Ethereum",
-                "quantity": eth_balance
-            },
-            "USD": {
-                "name": "US Dollar",
-                "quantity": usd_balance
-            }
+        "exchange":"Ethereum Decentralized Exchange",
+        "ETH": {
+            "name": "Ethereum",
+            "quantity": eth_balance
+        },
+        "USD": {
+            "name": "US Dollar",
+            "quantity": usd_balance
+        }
         
     }
 
-    # Only insert if not exists
-    print(collection)
-    if not collection.find():
+
+    if not collection.find_one({"exchange": "Ethereum Decentralized Exchange"}):
         collection.insert_one(default_assets)
 
 
