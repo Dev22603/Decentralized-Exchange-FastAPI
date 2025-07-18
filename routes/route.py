@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from controllers.controller import buy_asset, sell_asset, quote, get_assets
+from controllers.controller import buy_asset, sell_asset, get_assets
 from models.requests import BuyAssetRequest, SellAssetRequest
 
 router = APIRouter()
@@ -13,11 +13,6 @@ def handle_buy_asset(request: BuyAssetRequest):
 @router.post("/sell_asset")
 def handle_sell_asset(request: SellAssetRequest):
     return sell_asset(quantity=request.quantity)
-
-
-@router.get("/quote")
-def handle_quote():
-    return quote()
 
 
 @router.get("/get_assets")

@@ -32,7 +32,6 @@ def buy(quantity):
         }
     new_usd_quantity = C / (eth_quantity - quantity)
     usd_amount = new_usd_quantity - usd_quantity
-    # collection.update_one({"exchange": "Ethereum Decentralized Exchange"}, {"$inc": {"ETH.quantity": -quantity}})
     with client.start_session() as session:
         with session.start_transaction():
             collection.update_one(

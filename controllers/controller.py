@@ -1,9 +1,7 @@
 from repository.repository import init_assets, assets, buy, sell
 
-
 def startup():
     init_assets(1000, 100000000)
-
 
 def buy_asset(quantity):
     data = buy(quantity)
@@ -14,7 +12,6 @@ def buy_asset(quantity):
     }
     return response
 
-
 def sell_asset(quantity):
     data = sell(quantity)
     response = {
@@ -23,11 +20,6 @@ def sell_asset(quantity):
         "data": data,
     }
     return response
-
-
-def quote():
-    pass
-
 
 def get_assets():
     data = assets()
