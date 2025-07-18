@@ -1,13 +1,33 @@
-from repository.repository import init_assets 
+from repository.repository import init_assets, assets,buy
+
+
 def startup():
-    init_assets(1000, 1000)
-    
-def buy_asset():
+    init_assets(1000, 100000000)
+
+
+def buy_asset(quantity):
+    data=buy(quantity)
+    response = {
+        "status": 201,
+        "message": "Transaction Successful",
+        "data": data,
+    }
+    return response
+
+
+def sell_assset(quantity):
     pass
-def sell_assset():
-    pass
+
+
 def quote():
     pass
+
+
 def get_assets():
-    pass
-    
+    data = assets()
+    response = {
+        "status": 200,
+        "message": "Assets in the liquidity pool of the Ethereum Decentralized Exchange",
+        "data": data,
+    }
+    return response
