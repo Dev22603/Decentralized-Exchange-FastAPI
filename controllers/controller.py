@@ -1,4 +1,4 @@
-from repository.repository import init_assets, assets,buy
+from repository.repository import init_assets, assets, buy, sell
 
 
 def startup():
@@ -6,7 +6,7 @@ def startup():
 
 
 def buy_asset(quantity):
-    data=buy(quantity)
+    data = buy(quantity)
     response = {
         "status": 201,
         "message": "Transaction Successful",
@@ -15,8 +15,14 @@ def buy_asset(quantity):
     return response
 
 
-def sell_assset(quantity):
-    pass
+def sell_asset(quantity):
+    data = sell(quantity)
+    response = {
+        "status": 201,
+        "message": "Transaction Successful",
+        "data": data,
+    }
+    return response
 
 
 def quote():
