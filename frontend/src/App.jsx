@@ -4,6 +4,7 @@ import { SuperTokensWrapper } from "supertokens-auth-react";
 import ThirdPartySignInAndUp from "supertokens-auth-react/recipe/thirdparty";
 import { SessionAuth } from "supertokens-auth-react/recipe/session";
 import DashboardPage from "./pages/DashboardPage.jsx";
+import AccountPage from "./pages/AccountPage.jsx";
 import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react/ui";
 import * as reactRouterDom from "react-router-dom";
 import { ThirdPartyPreBuiltUI } from 'supertokens-auth-react/recipe/thirdparty/prebuiltui';
@@ -21,6 +22,14 @@ export default function App() {
             element={
               <SessionAuth>
                 <DashboardPage />
+              </SessionAuth>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <SessionAuth>
+                <AccountPage />
               </SessionAuth>
             }
           />
