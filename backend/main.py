@@ -50,6 +50,7 @@ init(
     ],
     mode='asgi'
 )
+app.add_middleware(get_middleware())
 
 app.add_middleware(
     CORSMiddleware,
@@ -59,7 +60,6 @@ app.add_middleware(
     allow_headers=["Content-Type"] + get_all_cors_headers(),
 )
 
-app.add_middleware(get_middleware())
 
 app.include_router(router, prefix="/api", tags=["api"])
 
