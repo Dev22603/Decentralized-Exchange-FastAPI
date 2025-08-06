@@ -20,10 +20,8 @@ const TradeWidget = () => {
     const fetchRate = async () => {
       try {
         const response = await axios.get('http://localhost:8000/get_assets');
-        const { ETH, USD } = response.data;
-        // Price of ETH in USD = y / x
-        const ethPrice = USD.quantity / ETH.quantity;
-        setRate(ethPrice);
+        const { ETH, USDT } = response.data;
+        setRate(ETH.quantity / USDT.quantity);
       } catch (err) {
         setError('Failed to fetch exchange rate.');
         console.error(err);

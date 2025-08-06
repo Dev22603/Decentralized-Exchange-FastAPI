@@ -7,3 +7,7 @@ class BuyAssetRequest(BaseModel):
 
 class SellAssetRequest(BaseModel):
     quantity: float
+
+
+class DepositUSDTRequest(BaseModel):
+    quantity: float
