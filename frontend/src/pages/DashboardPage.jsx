@@ -58,8 +58,8 @@ export default function DashboardPage() {
         )}
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <AccountInfo balances={balances} onBalanceUpdate={handleBalanceUpdate} />
-          <TradeWidget balances={balances} onBalanceUpdate={handleBalanceUpdate} />
+            <AccountInfo balances={balances} onBalanceUpdate={handleBalanceUpdate} />
+            <TradeWidget balances={balances} onBalanceUpdate={handleBalanceUpdate} />
         </div>
       </div>
     </div>

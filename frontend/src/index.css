@@ -2,7 +2,7 @@
 
 @layer base {
   html {
-    height: 100%;
+  height: 100%;
   }
   
   body {
@@ -12,14 +12,14 @@
     font-family: ui-sans-serif, system-ui, sans-serif;
   }
   
-  #root {
+#root {
     height: 100%;
   }
 
   /* Add cursor pointer on hover for buttons and links */
   button:hover, a:hover, [role="button"]:hover {
     cursor: pointer;
-  }
+}
 }
 
 @layer components {
@@ -32,11 +32,11 @@
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
-  }
+}
   
   .btn-primary:hover {
     background-color: rgb(29 78 216); /* bg-blue-700 */
-    cursor: pointer;
+  cursor: pointer;
   }
   
   .btn-primary:focus {
@@ -48,7 +48,7 @@
   .btn-secondary {
     background-color: rgb(55 65 81); /* bg-gray-700 */
     color: white;
-    font-weight: 500;
+  font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
@@ -59,7 +59,7 @@
   .btn-secondary:hover {
     background-color: rgb(75 85 99); /* bg-gray-600 */
     cursor: pointer;
-  }
+}
   
   .btn-secondary:focus {
     outline: 2px solid transparent;
@@ -68,7 +68,7 @@
   }
   
   .input-field {
-    width: 100%;
+  width: 100%;
     background-color: rgb(31 41 55); /* bg-gray-800 */
     border: 1px solid rgb(55 65 81); /* border-gray-700 */
     color: white;
@@ -77,7 +77,7 @@
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 200ms;
-  }
+}
   
   .input-field::placeholder {
     color: rgb(156 163 175); /* placeholder-gray-400 */
@@ -88,15 +88,15 @@
     outline-offset: 2px;
     box-shadow: 0 0 0 2px rgb(59 130 246);
     border-color: transparent;
-  }
+}
   
   .card {
     background-color: rgb(31 41 55); /* bg-gray-800 */
     border: 1px solid rgb(55 65 81); /* border-gray-700 */
     border-radius: 0.75rem;
-    padding: 1.5rem;
+  padding: 1.5rem;
     box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  }
+}
   
   .card-header {
     font-size: 1.25rem;
@@ -104,5 +104,5 @@
     font-weight: 600;
     color: white;
     margin-bottom: 1rem;
-  }
+}
 }

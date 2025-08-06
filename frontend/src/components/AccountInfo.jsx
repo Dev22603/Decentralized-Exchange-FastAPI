@@ -71,18 +71,18 @@ export default function AccountInfo({ balances, onBalanceUpdate }) {
             <label htmlFor="deposit-amount" className="block text-sm font-medium text-gray-300 mb-2">
               Amount (USDC)
             </label>
-            <input
+          <input
               id="deposit-amount"
-              type="number"
-              min="0"
-              step="0.01"
+            type="number"
+            min="0"
+            step="0.01"
               placeholder="Enter amount to deposit"
-              value={amount}
-              onChange={e => setAmount(e.target.value)}
+            value={amount}
+            onChange={e => setAmount(e.target.value)}
               className="input-field"
-              required
-            />
-          </div>
+            required
+          />
+        </div>
           
           <button 
             type="submit" 
@@ -103,7 +103,7 @@ export default function AccountInfo({ balances, onBalanceUpdate }) {
               </div>
             )}
           </button>
-        </form>
+      </form>
         
         {error && (
           <div className="mt-4 p-3 bg-red-900 border border-red-700 rounded-lg text-red-200">
