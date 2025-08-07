@@ -1,13 +1,8 @@
 from pydantic import BaseModel
 
-
-class BuyAssetRequest(BaseModel):
-    quantity: float
-
-
-class SellAssetRequest(BaseModel):
-    quantity: float
-
+class TradeAssetRequest(BaseModel):
+    amount: float
+    currency: str
 
 class DepositUSDTRequest(BaseModel):
-    quantity: float
+    amount: float
