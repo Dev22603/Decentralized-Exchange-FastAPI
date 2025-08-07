@@ -26,7 +26,9 @@ init(
     ),
     framework='fastapi',
     recipe_list=[
-        session.init(),
+        session.init(
+                    expose_access_token_to_frontend_in_cookie_based_auth=True
+                ),#temp changes till session verification is done
         thirdparty.init(
             sign_in_and_up_feature=thirdparty.SignInAndUpFeature(
                 providers=[

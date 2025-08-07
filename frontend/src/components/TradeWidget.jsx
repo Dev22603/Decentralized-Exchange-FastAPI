@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import { getAssets, tradeAsset } from "../utils/api";
+import {
+	getEthAmount,
+	getUSDTAmount,
+	tradeAsset,
+} from "../utils/api";
 import { MdSwapVert } from "react-icons/md";
 
 const TradeWidget = () => {
@@ -8,23 +12,25 @@ const TradeWidget = () => {
 	const [activeTab, setActiveTab] = useState("buy");
 	const [inputAmount, setInputAmount] = useState("0.0");
 	const [outputAmount, setOutputAmount] = useState("");
-	const [inputCurrency, setInputCurrency] = useState("ETH");
-	const [outputCurrency, setOutputCurrency] = useState("USD");
+	const [inputCurrency, setInputCurrency] = useState("USD");
+	const [outputCurrency, setOutputCurrency] = useState("ETH");
 	const [rate, setRate] = useState(null);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
 
 	const fetchRate = useCallback(async () => {
 		try {
-			const assets = await getAssets();
-			const ethAsset = assets.find((asset) => asset.symbol === "ETH");
-			if (ethAsset) {
-				setRate(ethAsset.price);
+			if (inputCurrency === "USD") {
+				const response = await getEthAmount(inputAmount);
+				setOutputAmount(response.data);
+			} else {
+				const response = await getUSDTAmount(inputAmount);
+				setOutputAmount(response.data);
 			}
 		} catch (err) {
 			console.error("Failed to fetch exchange rate:", err);
 		}
-	}, []);
+	}, [inputAmount]);
 
 	useEffect(() => {
 		fetchRate();

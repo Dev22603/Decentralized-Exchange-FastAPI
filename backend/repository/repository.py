@@ -24,9 +24,21 @@ def assets() -> Dict[str, Any]:
     """Get current liquidity pool status"""
     return liquidity_pool.find_one({}, {"_id": 0})
 
-def quote(eth_quantity: float) -> Dict[str, Any]:
-    """Get current liquidity pool status"""
-    return liquidity_pool.find_one({}, {"_id": 0})
+
+def eth_amount(amount: float) -> Dict[str, Any]:
+    pool=assets()
+    if not pool:
+        return {"error": "Liquidity pool not initialized"}
+    
+    pool_eth=pool["ETH"]["quantity"]
+    pool_usdt=pool["USD"]["quantity"]
+    C=pool_eth*pool_usdt
+    gas_fees=0.0005*amount
+    amount_after_fees=amount-gas_fees
+    possible_eth_amount=pool_eth-(C/(amount_after_fees+pool_usdt))
+
+    return possible_eth_amount
+    
 
 
 def buy(user_id: str, eth_quantity: float) -> Dict[str, Any]:
