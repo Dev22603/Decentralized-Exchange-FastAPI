@@ -5,24 +5,28 @@ A modern, dark-mode decentralized exchange interface built with React, Tailwind 
 ## Features
 
 ### 🎨 Modern Dark Mode UI
+
 - Complete dark theme with professional styling
 - Responsive design that works on all devices
 - Smooth animations and transitions
 - Intuitive user interface
 
 ### 🧭 Navigation
+
 - Clean navbar with logo and navigation links
 - Easy switching between Trading and Account pages
 - Mobile-responsive navigation menu
 - Active page indicators
 
 ### 💼 Account Management
+
 - Dedicated Account page with comprehensive overview
 - Real-time balance display with visual indicators
 - Transaction history with detailed information
 - Quick actions for common tasks
 
 ### 💱 Trading Interface
+
 - Intuitive swap interface with asset selection
 - Real-time exchange rate display
 - Fee calculation and transparency
@@ -30,6 +34,7 @@ A modern, dark-mode decentralized exchange interface built with React, Tailwind 
 - Asset swap functionality
 
 ### 🔐 Authentication
+
 - Secure authentication with SuperTokens
 - Protected routes for authenticated users
 - Seamless login/logout experience
@@ -46,11 +51,13 @@ A modern, dark-mode decentralized exchange interface built with React, Tailwind 
 ## Getting Started
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Start the development server:
+
    ```bash
    npm run dev
    ```
@@ -80,12 +87,14 @@ src/
 ## UI Components
 
 ### Design System
+
 - **Colors**: Dark gray palette with blue accents
 - **Typography**: Clean, readable fonts
 - **Spacing**: Consistent spacing using Tailwind utilities
 - **Components**: Reusable card, button, and input components
 
 ### Key Features
+
 - **Responsive Design**: Works on desktop, tablet, and mobile
 - **Accessibility**: Proper ARIA labels and keyboard navigation
 - **Loading States**: Smooth loading indicators throughout the app
@@ -95,6 +104,7 @@ src/
 ## API Integration
 
 The frontend integrates with the FastAPI backend for:
+
 - User authentication
 - Balance management
 - Trading operations

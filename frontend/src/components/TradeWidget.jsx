@@ -88,13 +88,13 @@ const TradeWidget = () => {
       const response = await tradeAsset(activeTab, ethAmount, "ETH");
       setSuccess(
         response.message ||
-          `${activeTab === "buy" ? "Purchase" : "Sale"} successful!`
+          `${activeTab === "buy" ? "Purchase" : "Sale"} successful!`,
       );
       setInputAmount("");
       setOutputAmount("");
     } catch (err) {
       setError(
-        err.response?.data?.error || "An error occurred during the trade."
+        err.response?.data?.error || "An error occurred during the trade.",
       );
       console.error(err);
     }
@@ -152,7 +152,7 @@ const TradeWidget = () => {
         {/* Conversion Display with swap button */}
         <div className="flex items-center mb-4 px-1 space-x-1">
           <span className="text-lg text-gray-400">
-            {inputCurrency === "USD" && activeTab=='buy'
+            {inputCurrency === "USD" && activeTab == "buy"
               ? `~ ${outputAmount || "0"} ${outputCurrency}`
               : `$${outputAmount || "0"}`}
           </span>
@@ -168,25 +168,25 @@ const TradeWidget = () => {
         </div>
 
         {/* Preset Buttons */}
-        {inputCurrency==='USD'?
-        <div className="flex space-x-2 mb-6">
-          {presetAmounts.map((amount) => (
-            <button
-            key={amount}
-            type="button"
-            onClick={() => handlePresetClick(amount)}
-            className={`py-2 px-4 rounded-full text-sm font-semibold transition-colors duration-300 ${
-              inputCurrency === "USD"
-              ? "bg-gray-600 hover:bg-gray-500 text-white"
-              : "bg-gray-700 hover:bg-gray-600 text-gray-300"
-              }`}
-              disabled={inputCurrency !== "USD"}
+        {inputCurrency === "USD" ? (
+          <div className="flex space-x-2 mb-6">
+            {presetAmounts.map((amount) => (
+              <button
+                key={amount}
+                type="button"
+                onClick={() => handlePresetClick(amount)}
+                className={`py-2 px-4 rounded-full text-sm font-semibold transition-colors duration-300 ${
+                  inputCurrency === "USD"
+                    ? "bg-gray-600 hover:bg-gray-500 text-white"
+                    : "bg-gray-700 hover:bg-gray-600 text-gray-300"
+                }`}
+                disabled={inputCurrency !== "USD"}
               >
-              ${amount}
-            </button>
-          ))}
-        </div>
-            :null}
+                ${amount}
+              </button>
+            ))}
+          </div>
+        ) : null}
 
         {/* Trade Button */}
         <button

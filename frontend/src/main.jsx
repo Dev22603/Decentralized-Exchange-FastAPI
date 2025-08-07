@@ -17,9 +17,7 @@ SuperTokens.init({
   recipeList: [
     ThirdParty.init({
       signInAndUpFeature: {
-        providers: [
-          Google.init(),
-        ],
+        providers: [Google.init()],
       },
     }),
     Session.init(),
@@ -28,6 +26,6 @@ SuperTokens.init({
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <App />
-  </React.StrictMode>
+    <App />
+  </React.StrictMode>,
 );
