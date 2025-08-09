@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSessionContext } from "supertokens-auth-react/recipe/session";
-import {
-	getEthAmount,
-	getUSDTAmount,
-	tradeAsset,
-} from "../utils/api";
+import { getEthAmount, getUSDTAmount, tradeAsset } from "../utils/api";
 import { MdSwapVert } from "react-icons/md";
 
 const TradeWidget = () => {
@@ -14,7 +10,6 @@ const TradeWidget = () => {
 	const [outputAmount, setOutputAmount] = useState("");
 	const [inputCurrency, setInputCurrency] = useState("USD");
 	const [outputCurrency, setOutputCurrency] = useState("ETH");
-	const [rate, setRate] = useState(null);
 	const [error, setError] = useState("");
 	const [success, setSuccess] = useState("");
 
@@ -37,21 +32,6 @@ const TradeWidget = () => {
 		const interval = setInterval(fetchRate, 10000);
 		return () => clearInterval(interval);
 	}, [fetchRate]);
-
-	useEffect(() => {
-		if (rate && inputAmount) {
-			const amount = parseFloat(inputAmount);
-			if (!isNaN(amount)) {
-				if (inputCurrency === "USD") {
-					setOutputAmount((amount / rate).toFixed(8));
-				} else {
-					setOutputAmount((amount * rate).toFixed(2));
-				}
-			} else {
-				setOutputAmount("");
-			}
-		}
-	}, [inputAmount, rate, inputCurrency]);
 
 	const handleInputChange = (e) => {
 		setInputAmount(e.target.value);
@@ -116,7 +96,12 @@ const TradeWidget = () => {
 			<div className="flex mb-6 bg-[#1a1a1a] rounded-lg p-1">
 				<button
 					type="button"
-					onClick={() => setActiveTab("buy")}
+					onClick={() => {
+                        setInputCurrency("USD");
+                        setOutputCurrency("ETH");
+                        setInputAmount(outputAmount || "0.0");
+						setActiveTab("buy");
+					}}
 					className={`flex-1 py-2 px-4 rounded-md font-semibold transition-all duration-300 ${
 						activeTab === "buy"
 							? "bg-blue-500 text-white shadow-lg"
