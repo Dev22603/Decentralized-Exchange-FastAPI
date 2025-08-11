@@ -1,25 +1,12 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://localhost:8000/api",
+    baseURL: "http://127.0.0.1:8000/api",
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',
     },
 });
-
-// Only add response interceptor for session handling
-apiClient.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        if (error.response?.status === 401) {
-            console.error('Session expired or invalid');
-            // Redirect to login
-            window.location.href = '/login';
-        }
-        return Promise.reject(error);
-    }
-);
 
 export const getAssets = async () => {
 	const response = await apiClient.get("/get_assets");
@@ -42,10 +29,7 @@ export const getEthAmount = async (amount) => {
       
       const response = await apiClient.get("/get_eth_amount", {
         params: { amount },
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true,
+
       });
       
       return response.data;

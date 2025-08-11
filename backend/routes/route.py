@@ -30,5 +30,5 @@ async def handle_deposit_usdt(request: DepositUSDTRequest, session: SessionConta
     return deposit_usdt(quantity=request.amount)
 
 @router.get("/get_eth_amount")
-async def handle_get_eth_amount(amount: float, session: SessionContainer = Depends(verify_session(session_required=False))):
+async def handle_get_eth_amount(amount: float, session: SessionContainer = Depends(verify_session(session_required=True))):
     return get_eth_amount(amount)#temp changes till session verification is done
