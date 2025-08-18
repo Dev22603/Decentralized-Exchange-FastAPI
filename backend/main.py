@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from supertokens_python.recipe.session.interfaces import APIInterface
 from routes.route import router
 from controllers.controller import startup
 
@@ -7,11 +8,58 @@ from supertokens_python.recipe import session, multitenancy, thirdparty
 
 from supertokens_python.framework.fastapi import get_middleware
 from fastapi.middleware.cors import CORSMiddleware
-from supertokens_python.recipe.thirdparty import ProviderInput, ProviderConfig, ProviderClientConfig, SignInAndUpFeature
+from supertokens_python.recipe.thirdparty import InputOverrideConfig, ProviderInput, ProviderConfig, ProviderClientConfig, SignInAndUpFeature
 from config import Config 
-
+from supertokens_python.recipe.thirdparty.interfaces import (
+    SignInUpPostOkResult,
+    SignInUpPostNoEmailGivenByProviderResponse,
+    APIInterface,
+)
+from typing import Dict, Any
+from supertokens_python.exceptions import BadInputError
 
 app = FastAPI()
+
+
+
+ALLOWED_DOMAIN = "@zymr.com"
+
+
+class FieldErrorResponse:
+    def __init__(self, form_fields):
+        self.form_fields = form_fields            # list[dict]
+
+    def to_json(self):
+        return {
+            "status": "FIELD_ERROR",
+            "formFields": self.form_fields,
+        }
+def get_thirdparty_override():
+    def override_apis(oi: APIInterface):
+        original = oi.sign_in_up_post
+
+        async def sign_in_up_post(**kwargs):
+            # Call original with all parameters dynamically
+            result = await original(**kwargs)
+            print("result::", result.user.to_json())
+
+            # Handle no email case
+            if isinstance(result, SignInUpPostNoEmailGivenByProviderResponse):
+                return result
+
+            # Enforce @zymr.com domain rule
+            if isinstance(result, SignInUpPostOkResult):
+                email = (result.user.login_methods[0].email or "").lower()
+                if not email.endswith(ALLOWED_DOMAIN):
+                    raise BadInputError("Only @zymr.com emails are allowed")
+            print("finalresult::", result)
+
+            return result
+
+        oi.sign_in_up_post = sign_in_up_post
+        return oi
+
+    return InputOverrideConfig(apis=override_apis)
 
 init(
     app_info=InputAppInfo(
@@ -28,7 +76,7 @@ init(
     recipe_list=[
         session.init(
                     expose_access_token_to_frontend_in_cookie_based_auth=True
-                ),#temp changes till session verification is done
+                ),
         thirdparty.init(
             sign_in_and_up_feature=thirdparty.SignInAndUpFeature(
                 providers=[
@@ -45,8 +93,10 @@ init(
                         )
                     )
                     
-                ]
-            )
+                ],
+            ),
+                        override=get_thirdparty_override(),  # add this
+
         ),
         multitenancy.init(),
     ],
