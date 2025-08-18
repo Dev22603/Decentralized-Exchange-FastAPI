@@ -8,6 +8,7 @@ import AccountPage from "./pages/AccountPage.jsx";
 import { getSuperTokensRoutesForReactRouterDom } from "supertokens-auth-react/ui";
 import * as reactRouterDom from "react-router-dom";
 import { ThirdPartyPreBuiltUI } from "supertokens-auth-react/recipe/thirdparty/prebuiltui";
+import { EmailPasswordPreBuiltUI } from "supertokens-auth-react/recipe/emailpassword/prebuiltui";
 
 export default function App() {
 	return (
@@ -15,10 +16,10 @@ export default function App() {
 			<BrowserRouter>
 				<Routes>
 					{getSuperTokensRoutesForReactRouterDom(reactRouterDom, [
-						ThirdPartyPreBuiltUI,
+						ThirdPartyPreBuiltUI, EmailPasswordPreBuiltUI
 					])}
 
-					<Route path="/auth" element={<ThirdPartySignInAndUp />} />
+					{/* <Route path="/auth" element={<ThirdPartySignInAndUp />} /> */}
 					<Route
 						path="/"
 						element={
