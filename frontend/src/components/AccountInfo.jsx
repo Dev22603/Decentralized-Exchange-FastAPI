@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import api from "../services/api";
+import { apiClient } from "../utils/api.js";
 
 export default function AccountInfo({ balances, onBalanceUpdate }) {
 	const [amount, setAmount] = useState("");
@@ -13,7 +13,7 @@ export default function AccountInfo({ balances, onBalanceUpdate }) {
 		setSuccess("");
 		setLoading(true);
 		try {
-			const res = await api.post("/api/account/deposit", {
+			const res = await apiClient.post("/api/account/deposit", {
 				amount: Number(amount),
 			});
 			onBalanceUpdate(res.data);

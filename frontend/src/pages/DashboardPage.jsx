@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar.jsx";
 import AccountInfo from "../components/AccountInfo.jsx";
 import TradeWidget from "../components/TradeWidget.jsx";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import api from "../services/api";
+import { apiClient } from "../utils/api.js";
 
 export default function DashboardPage() {
 	const [balances, setBalances] = useState({ ETH: 0, USDC: 0 });
@@ -14,7 +14,7 @@ export default function DashboardPage() {
 		setLoading(true);
 		setError("");
 		try {
-			const res = await api.get("/api/account/balances");
+			const res = await apiClient.get("/api/account/balances");
 			setBalances(res.data);
 		} catch (err) {
 			setError("Failed to fetch balances");

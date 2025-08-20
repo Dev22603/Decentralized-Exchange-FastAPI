@@ -1,63 +1,75 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-    baseURL: "http://127.0.0.1:8000/api",
-    withCredentials: true,
-    headers: {
-        'Content-Type': 'application/json',
-    },
+	baseURL: "http://127.0.0.1:8000",
+	withCredentials: true,
+	headers: {
+		"Content-Type": "application/json",
+	},
 });
 
-export const getAssets = async () => {
-	const response = await apiClient.get("/get_assets");
+const getAssets = async () => {
+	const response = await apiClient.get("/api/get_assets");
 	return response.data;
 };
 
-export const tradeAsset = async (tradeType, amount, currency) => {
-	const endpoint = tradeType === "buy" ? "/buy_eth" : "/sell_eth";
+const tradeAsset = async (tradeType, amount, currency) => {
+	const endpoint = tradeType === "buy" ? "/api/buy_eth" : "/api/sell_eth";
 	const payload = tradeType === "buy" ? { amount, currency } : { amount };
 	const response = await apiClient.post(endpoint, payload);
 	return response.data;
 };
 
-export const getUSDTAmount = async (amount) => {
-	const response = await apiClient.get("/get_usdt_amount", { params: { amount } });
+const getUSDTAmount = async (amount) => {
+	const response = await apiClient.get("/api/get_usdt_amount", {
+		params: { amount },
+	});
 	return response.data;
 };
-export const getEthAmount = async (amount) => {
-    try {
-      
-      const response = await apiClient.get("/get_eth_amount", {
-        params: { amount },
+const getEthAmount = async (amount) => {
+	try {
+		const response = await apiClient.get("/api/get_eth_amount", {
+			params: { amount },
+		});
 
-      });
-      
-      return response.data;
-    } catch (error) {
-      // Handle authentication errors
-      if (error.response?.status === 401) {
-        console.error('Authentication failed. Please log in again.');
-        // Optional: redirect to login or trigger re-authentication
-        window.location.href = '/login'; // or use your router
-      }
-      throw error;
-    }
-  };
-  
+		return response.data;
+	} catch (error) {
+		// Handle authentication errors
+		if (error.response?.status === 401) {
+			console.error("Authentication failed. Please log in again.");
+			// Optional: redirect to login or trigger re-authentication
+			window.location.href = "/login"; // or use your router
+		}
+		throw error;
+	}
+};
 
-export const getEthBalance = async () => {
-	const response = await apiClient.get("/get_eth_balance");
+const getEthBalance = async () => {
+	const response = await apiClient.get("/api/get_eth_balance");
 	return response.data;
 };
-export const getUsdtBalance = async () => {
-	const response = await apiClient.get("/get_usdt_balance");
+const getUsdtBalance = async () => {
+	const response = await apiClient.get("/api/get_usdt_balance");
 	return response.data;
 };
-export const getTransactions = async () => {
-	const response = await apiClient.get("/get_transactions");
+const getTransactions = async () => {
+	const response = await apiClient.get("/api/get_transactions");
 	return response.data;
 };
-export const deposit = async (amount) => {
-	const response = await apiClient.post("/account/deposit_usdt", { amount });
+const deposit = async (amount) => {
+	const response = await apiClient.post("/api/account/deposit_usdt", {
+		amount,
+	});
 	return response.data;
+};
+export {
+	apiClient,
+	getAssets,
+	tradeAsset,
+	getUSDTAmount,
+	getEthAmount,
+	getEthBalance,
+	getUsdtBalance,
+	getTransactions,
+	deposit,
 };

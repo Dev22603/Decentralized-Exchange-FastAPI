@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signOut } from "supertokens-auth-react/recipe/session";
 import LoadingSpinner from "../components/LoadingSpinner.jsx";
-import api from "../services/api";
+import {apiClient} from "../utils/api.js";
 
 export default function AccountPage() {
 	const [balances, setBalances] = useState({ ETH: 0, USDC: 0 });
@@ -16,8 +16,8 @@ export default function AccountPage() {
 		setError("");
 		try {
 			const [balancesRes, transactionsRes] = await Promise.all([
-				api.get("/api/account/balances"),
-				api.get("/api/account/transactions"),
+				apiClient.get("/api/account/balances"),
+				apiClient.get("/api/account/transactions"),
 			]);
 			setBalances(balancesRes.data);
 			setTransactions(transactionsRes.data || []);
